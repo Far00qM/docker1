@@ -44,5 +44,16 @@
 #
 class docker {
 
+  $docker = ['yum-utils', 'device-mapper-persistent-data', 'lvm2', 'docker-ce']
+  package { 'docker':
+    ensure => present,
+    name => $docker,
+  }
+  service {'docker':
+    ensure => running,
+    enable => true,
+    name => 'docker',
+    require => Package[docker],
 
+  }
 }
